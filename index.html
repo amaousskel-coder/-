@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>برا السالفة - نسخة النخبة</title>
+<title>برا السالفة - النسخة النهائية</title>
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
@@ -23,6 +23,143 @@ body {
     align-items: center;
     padding: 20px;
     position: relative;
+    overflow-x: hidden;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.5; }
+    50% { transform: translateY(-20px) translateX(10px); opacity: 0.8; }
+}
+
+.notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 30px 50px;
+    border-radius: 20px;
+    font-size: 2em;
+    font-weight: bold;
+    z-index: 2000;
+    animation: notificationPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), glow 2s infinite;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    border: 3px solid white;
+}
+
+.notification small {
+    display: block;
+    font-size: 0.5em;
+    margin-top: 10px;
+    opacity: 0.9;
+}
+
+@keyframes notificationPop {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    70% { transform: translate(-50%, -50%) scale(1.1); }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 20px #667eea; }
+    50% { box-shadow: 0 0 50px #764ba2; }
+    100% { box-shadow: 0 0 20px #667eea; }
+}
+
+.choice-screen {
+    text-align: center;
+    padding: 40px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 30px;
+    margin: 20px 0;
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border: 3px solid white;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); }
+    70% { transform: scale(0.95); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.choice-screen h2 {
+    color: white;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.choice-screen p {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+.choice-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.choice-btn {
+    flex: 1;
+    padding: 25px;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    color: white;
+    border: 2px solid white;
+}
+
+.choice-btn.continue {
+    background: linear-gradient(135deg, #00b09b, #96c93d);
+    animation: pulse 2s infinite;
+}
+
+.choice-btn.continue:hover {
+    transform: scale(1.1) rotate(2deg);
+    box-shadow: 0 20px 40px rgba(0,176,155,0.5);
+}
+
+.choice-btn.vote {
+    background: linear-gradient(135deg, #ff6b6b, #ee5253);
+    animation: pulse 2s infinite reverse;
+}
+
+.choice-btn.vote:hover {
+    transform: scale(1.1) rotate(-2deg);
+    box-shadow: 0 20px 40px rgba(255,107,107,0.5);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 .container {
@@ -30,11 +167,13 @@ body {
     backdrop-filter: blur(10px);
     border-radius: 30px;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(255,255,255,0.1) inset;
-    max-width: 650px;
+    max-width: 700px;
     width: 100%;
     padding: 40px;
     animation: slideIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     border: 1px solid rgba(255,255,255,0.3);
+    position: relative;
+    z-index: 100;
 }
 
 @keyframes slideIn {
@@ -51,7 +190,7 @@ body {
 h1 {
     text-align: center;
     margin-bottom: 30px;
-    font-size: 3em;
+    font-size: 3.5em;
     font-weight: 800;
     background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     -webkit-background-clip: text;
@@ -221,7 +360,7 @@ select:focus, input:focus {
     font-size: 1.4em;
     font-weight: 700;
     border-right: 8px solid #f88;
-    animation: pulse 2s infinite, glow 2s infinite;
+    animation: pulse 2s infinite;
     color: #2c3e50;
     box-shadow: 0 10px 25px rgba(253, 160, 133, 0.4);
 }
@@ -230,12 +369,6 @@ select:focus, input:focus {
     0% { transform: scale(1); }
     50% { transform: scale(1.02); }
     100% { transform: scale(1); }
-}
-
-@keyframes glow {
-    0% { box-shadow: 0 0 5px #fda085; }
-    50% { box-shadow: 0 0 30px #f6d365; }
-    100% { box-shadow: 0 0 5px #fda085; }
 }
 
 .homeBtn {
@@ -274,6 +407,22 @@ select:focus, input:focus {
     font-weight: 700;
     border-radius: 15px;
     position: relative;
+    transition: all 0.3s ease;
+}
+
+.vote-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.vote-btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.vote-btn:disabled::after {
+    display: none;
 }
 
 .vote-btn.selected {
@@ -283,19 +432,19 @@ select:focus, input:focus {
 }
 
 .vote-btn.selected::after {
-    content: "✓✓";
+    content: "✓";
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: -5px;
+    right: -5px;
     background: #00b894;
     color: white;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2em;
+    font-size: 1em;
     border: 2px solid white;
 }
 
@@ -328,6 +477,14 @@ select:focus, input:focus {
     padding: 15px;
     border-radius: 50px;
     border: 3px solid #2c5364;
+    position: relative;
+}
+
+#roundCounter small {
+    display: block;
+    font-size: 0.6em;
+    color: #e67e22;
+    margin-top: 5px;
 }
 
 #asker, #receiver {
@@ -348,6 +505,18 @@ select:focus, input:focus {
 #receiver {
     color: #fff;
     background: linear-gradient(135deg, #ff7675, #d63031);
+}
+
+.open-question-badge {
+    background: linear-gradient(135deg, #f9ca24, #f0932b);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px 0;
+    display: inline-block;
+    animation: pulse 2s infinite;
 }
 
 .spy-name {
@@ -381,7 +550,6 @@ select:focus, input:focus {
     border: 2px dashed #2c5364;
 }
 
-/* تخصيص شريط التمرير */
 .voting-grid::-webkit-scrollbar {
     width: 10px;
 }
@@ -396,74 +564,11 @@ select:focus, input:focus {
     border-radius: 10px;
 }
 
-/* شاشة اختيار الاستمرار */
-.choice-screen {
-    text-align: center;
-    padding: 30px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    border-radius: 20px;
-    margin: 20px 0;
-    animation: bounceIn 0.5s ease;
-}
-
-@keyframes bounceIn {
-    0% { transform: scale(0.9); opacity: 0; }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-.choice-screen h2 {
-    color: white;
-    font-size: 2em;
-    margin-bottom: 20px;
-}
-
-.choice-screen p {
-    color: rgba(255,255,255,0.9);
-    font-size: 1.3em;
-    margin-bottom: 30px;
-}
-
-.choice-buttons {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-.choice-btn {
-    flex: 1;
-    padding: 20px;
-    font-size: 1.3em;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: bold;
-}
-
-.choice-btn.continue {
-    background: linear-gradient(135deg, #00b09b, #96c93d);
-    color: white;
-}
-
-.choice-btn.continue:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(0,176,155,0.4);
-}
-
-.choice-btn.vote {
-    background: linear-gradient(135deg, #ff6b6b, #ee5253);
-    color: white;
-}
-
-.choice-btn.vote:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(255,107,107,0.4);
-}
-
 </style>
 </head>
 <body>
+
+<div class="particles" id="particles"></div>
 
 <button class="homeBtn" onclick="goHome()">🏠 الصفحة الرئيسية</button>
 
@@ -479,8 +584,24 @@ select:focus, input:focus {
         <button class="category-btn" onclick="selectCategory('مشاهير',['⚽ محمد صلاح','⚽ رونالدو','⚽ ميسي','🎤 عمرو دياب','🎭 عادل إمام','🎬 أحمد حلمي','🎤 تامر حسني','🎤 نانسي عجرم','🎤 فيروز','🎬 محمد هنيدي','🎬 ياسمين عبدالعزيز','🎤 شيرين'])">🌟 مشاهير</button>
         <button class="category-btn" onclick="selectCategory('دول',['🇩🇿 الجزائر','🇪🇬 مصر','🇲🇦 المغرب','🇸🇦 السعودية','🇦🇪 الإمارات','🇫🇷 فرنسا','🇮🇹 إيطاليا','🇯🇵 اليابان','🇹🇷 تركيا','🇺🇸 أمريكا','🇬🇧 بريطانيا','🇩🇪 ألمانيا'])">🌍 دول</button>
         <button class="category-btn" onclick="selectCategory('أجهزة',['📱 آيفون','💻 لابتوب','📺 تلفزيون','📱 آيباد','📸 كاميرا','🎧 سماعات','⌚ ساعة ذكية','🎮 بلايستيشن','📱 سامسونج','💻 ماك بوك','🎧 ايربودز','📱 آيبود'])">📱 أجهزة</button>
+        <button class="category-btn" onclick="selectCategory('أنمي',['⚡ ناروتو','🐉 دراغون بول','👒 ون بيس','⚔️ سيفر','🔮 جوتسو','🌸 ساكورا','🦊 كيوبي','🧙 فول ميتال','🗡️ بليتش','🤺 ديمن سلاير','🏀 سلام دانك','🧛 ديث نوت'])">🇯🇵 أنمي</button>
+        <button class="category-btn" onclick="selectCategory('شخصيات أنمي',['🍥 ناروتو','⚡ ساسكي','🌸 ساكورا','🦊 كاكاشي','👒 لوفي','⚔️ زورو','🍷 سانجي','💀 إيتاشي','🐉 جوكو','🧝 سيفر','⚡ كيلوا','👑 هيسوكا'])">🎌 شخصيات أنمي</button>
         <button class="category-btn" onclick="selectCategory('حيوانات',['🦁 أسد','🐘 فيل','🦒 زرافة','🐶 كلب','🐱 قطة','🦉 بومة','🐬 دولفين','🦅 نسر','🐅 نمر','🐺 ذئب','🦊 ثعلب','🐻 دب','🦌 غزال','🐎 حصان','🐑 خروف','🐐 ماعز','🐫 جمل','🐧 بطريق','🦆 بطة','🐓 ديك','🐔 دجاجة','🕊️ حمامة','🦅 صقر','🦜 ببغاء','🐝 نحلة','🦋 فراشة','🕷️ عنكبوت','🐢 سلحفاة','🐊 تمساح','🐒 قرد','🦧 شمبانزي','🐼 باندا','🐆 فهد','🦘 كنغر','🐨 كوالا','🐠 فرس البحر','🐋 حوت','🦈 قرش','🐟 سمكة','🐴 حمار','🐂 ثور','🐄 بقرة','🦓 حمار وحشي','🦌 ظبي','🦚 طاووس','🦩 نحام','🐦 غراب','🦅 صقر'])">🦁 حيوانات</button>
         <button class="category-btn" onclick="selectCategory('رياضات',['⚽ كرة قدم','🏀 كرة سلة','🏊 سباحة','🎾 تنس','🥋 جودو','🥊 ملاكمة','🤸 جمباز','🏎️ فورمولا','🏐 كرة طائرة','🏓 تنس طاولة','🏹 رماية','🚴 سباق دراجات'])">⚽ رياضات</button>
+        <button class="category-btn" onclick="selectCategory('ثقافة عامة',['🎨 الفن','📚 الأدب','🔬 العلم','🏛️ التاريخ','🌍 الجغرافيا','🎵 الموسيقى','🎭 المسرح','📖 الفلسفة','⚖️ القانون','💻 البرمجة','🧮 الرياضيات','🔭 الفضاء'])">📚 ثقافة عامة</button>
+        <button class="category-btn" onclick="selectCategory('كل شيء', [
+            '🍎 تفاحة', '🍌 موز', '⚽ محمد صلاح', '🇩🇿 الجزائر', '📱 آيفون', '⚡ ناروتو', '🍥 ناروتو',
+            '🦁 أسد', '⚽ كرة قدم', '🎨 الفن', '🐉 دراغون بول', '🇪🇬 مصر', '💻 لابتوب', '🌸 ساكورا',
+            '🐘 فيل', '🏀 كرة سلة', '📚 الأدب', '👒 ون بيس', '🇲🇦 المغرب', '📺 تلفزيون', '🦊 كاكاشي',
+            '🦒 زرافة', '🏊 سباحة', '🔬 العلم', '⚔️ سيفر', '🇸🇦 السعودية', '📱 آيباد', '👒 لوفي',
+            '🐶 كلب', '🎾 تنس', '🏛️ التاريخ', '🔮 جوتسو', '🇦🇪 الإمارات', '📸 كاميرا', '⚔️ زورو',
+            '🐱 قطة', '🥋 جودو', '🌍 الجغرافيا', '💀 إيتاشي', '🇫🇷 فرنسا', '🎧 سماعات', '🍷 سانجي',
+            '🦉 بومة', '🥊 ملاكمة', '🎵 الموسيقى', '🐉 جوكو', '🇮🇹 إيطاليا', '⌚ ساعة ذكية', '🧝 سيفر',
+            '🐬 دولفين', '🤸 جمباز', '🎭 المسرح', '⚡ كيلوا', '🇯🇵 اليابان', '🎮 بلايستيشن', '👑 هيسوكا',
+            '🦅 نسر', '🏎️ فورمولا', '📖 الفلسفة', '🇹🇷 تركيا', '📱 سامسونج', '⚖️ القانون', '🇺🇸 أمريكا',
+            '🏐 كرة طائرة', '💻 البرمجة', '🇬🇧 بريطانيا', '💻 ماك بوك', '🧮 الرياضيات', '🇩🇪 ألمانيا',
+            '🏓 تنس طاولة', '🔭 الفضاء', '🎧 ايربودز', '🏹 رماية', '📱 آيبود', '🚴 سباق دراجات'
+        ])">✨ كل شيء</button>
     </div>
 
     <h3>👥 عدد اللاعبين</h3>
@@ -494,7 +615,10 @@ select:focus, input:focus {
         <option value="9">9 لاعبين</option>
         <option value="10">10 لاعبين</option>
         <option value="11">11 لاعبين</option>
-
+        <option value="12">12 لاعبين</option>
+        <option value="13">13 لاعبين</option>
+        <option value="14">14 لاعبين</option>
+        <option value="15">15 لاعبين</option>
     </select>
 
     <h3>🕵️ عدد اللي برا السالفة</h3>
@@ -503,6 +627,7 @@ select:focus, input:focus {
         <option value="2">2 لاعبين</option>
         <option value="3">3 لاعبين</option>
         <option value="4">4 لاعبين</option>
+        <option value="5">5 لاعبين</option>
     </select>
 
     <button onclick="startGame()" id="startBtn" disabled>▶ ابدأ اللعبة</button>
@@ -535,12 +660,16 @@ select:focus, input:focus {
         <p>الفئة: <span id="categoryName"></span></p>
     </div>
 
-    <div id="roundCounter">الجولة 1 من 11</div>
+    <div id="roundCounter">الجولة 1 / 10</div>
+    <div id="questionTypeBadge" class="open-question-badge hidden">🎯 جولة مفتوحة: الكل يجاوب</div>
 
     <div style="text-align:center; margin:30px 0;">
         <span id="asker" style="font-size:1.5em"></span>
-        <span style="color:#666; font-size:1.3em">❓ يسأل ❓</span>
+        <span style="color:#666; font-size:1.3em" id="questionTypeSymbol">❓ يسأل ❓</span>
         <span id="receiver" style="font-size:1.5em"></span>
+        <div id="openQuestionList" style="margin-top:15px; font-size:1.2em; color:#2c5364; background:#f1f2f6; padding:15px; border-radius:15px; display:none">
+            <strong>الكل يجاوب ما عدا:</strong> <span id="excludedPlayers"></span>
+        </div>
     </div>
 
     <div style="background:#f8f9fa; padding:20px; border-radius:20px; margin:25px 0; border:3px dashed #2c5364">
@@ -550,11 +679,11 @@ select:focus, input:focus {
     <button onclick="nextQuestion()" id="nextQuestionBtn">⏭ بعد السؤال</button>
 </div>
 
-<!-- شاشة التصويت على برا السالفة (كل لاعب يصوت) -->
+<!-- شاشة التصويت -->
 <div id="votingScreen" class="hidden">
     <div class="word-display">
         <h2>🗳️ التصويت السري</h2>
-        <p>كل لاعب يختار الستوت اللي يتوقعهم برا السالفة</p>
+        <p>كل لاعب يختار اللي يتوقعهم برا السالفة (ما يصوت على نفسه)</p>
     </div>
 
     <div id="votingButtons" class="voting-grid"></div>
@@ -564,17 +693,17 @@ select:focus, input:focus {
     <button onclick="submitVote()" id="voteBtn" disabled>✅ تأكيد التصويت</button>
 </div>
 
-<!-- شاشة تخمين برا السالفة للكلمة (بعد الكشف) -->
+<!-- شاشة تخمين برا السالفة -->
 <div id="guessScreen" class="hidden">
     <div class="word-display">
         <h2>🔍 تخمين الكلمة</h2>
         <div class="spy-name" id="spyName"></div>
-        <p>حاول تخمن وش كانت السالفة ياستوت؟ (اختر 1 من 8)</p>
+        <p>حاول تخمن وش كانت السالفة؟ (اختر 1 من 8)</p>
     </div>
 
     <div id="guessOptions" class="voting-grid" style="grid-template-columns:repeat(2, 1fr)"></div>
 
-    <button onclick="showFinalResult()" id="guessBtn" disabled>🔮 شوف النتيجة ياستوت</button>
+    <button onclick="showFinalResult()" id="guessBtn" disabled>🔮 شوف النتيجة</button>
 </div>
 
 <!-- شاشة النتيجة النهائية -->
@@ -584,13 +713,60 @@ select:focus, input:focus {
         <div id="finalResult" style="font-size:1.3em; line-height:2.2"></div>
     </div>
 
-    <button onclick="playAgain()" style="background:linear-gradient(135deg,#00b894,#00cec9)">🔄 نلعب بنفس الأسماء</button>
-    <button onclick="goHome()" style="background:linear-gradient(135deg,#ff7675,#d63031)">🏠 تغيير اللاعبين</button>
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
+        <button onclick="playAgain()" style="background:linear-gradient(135deg,#00b894,#00cec9); flex: 1;">🔄 نفس اللاعبين</button>
+        <button onclick="changeCategory()" style="background:linear-gradient(135deg,#f39c12,#e67e22); flex: 1;">🎯 تغيير الموضوع</button>
+    </div>
+    <button onclick="goHome()" style="background:linear-gradient(135deg,#ff7675,#d63031); margin-top: 10px;">🏠 تغيير اللاعبين</button>
 </div>
 
 </div>
 
 <script>
+
+function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 50;
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const size = Math.random() * 10 + 5;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        
+        const colors = ['#ff6b6b', '#4ecdc4', '#ffe66d', '#ff9ff6', '#54a0ff'];
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.opacity = Math.random() * 0.5 + 0.3;
+        
+        particlesContainer.appendChild(particle);
+    }
+}
+
+function showNotification(title, message, duration = 3000) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.innerHTML = `
+        <div>${title}</div>
+        <small>${message}</small>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'notificationPop 0.5s reverse';
+        setTimeout(() => {
+            notification.remove();
+        }, 500);
+    }, duration);
+}
+
 let gameState = {
     category: '',
     words: [],
@@ -608,8 +784,10 @@ let gameState = {
     votes: [],
     spyGuess: null,
     votingComplete: false,
-    lastAsker: -1, // آخر واحد سأل
-    askedHistory: [] // تاريخ الأسئلة
+    lastAsker: -1,
+    askedHistory: [],
+    currentRoundAsker: -1,
+    openQuestionStart: 0
 }
 
 function selectCategory(c, w) {
@@ -626,25 +804,31 @@ function selectCategory(c, w) {
 function startGame() {
     gameState.playerCount = parseInt(document.getElementById("playerCount").value)
     gameState.outsideCount = parseInt(document.getElementById("outsideCount").value)
-
-    // عدد الجولات = عدد اللاعبين × 2 (عشان الكل يشارك)
+    
     gameState.maxQuestions = gameState.playerCount * 2
+    gameState.openQuestionStart = Math.floor(gameState.maxQuestions * 0.7)
 
     gameState.selectedWord = gameState.words[Math.floor(Math.random() * gameState.words.length)]
 
     document.getElementById("categoryScreen").classList.add("hidden")
-    document.getElementById("playersScreen").classList.remove("hidden")
+    
+    if (window.savedPlayers && window.savedPlayers.length === gameState.playerCount) {
+        gameState.players = [...window.savedPlayers]
+        window.savedPlayers = null
+        assignRoles()
+    } else {
+        document.getElementById("playersScreen").classList.remove("hidden")
+        let playersInputs = document.getElementById("playersInputs")
+        playersInputs.innerHTML = ""
 
-    let playersInputs = document.getElementById("playersInputs")
-    playersInputs.innerHTML = ""
-
-    for (let i = 0; i < gameState.playerCount; i++) {
-        let input = document.createElement("input")
-        input.id = "p" + i
-        input.placeholder = "اسم اللاعب " + (i + 1)
-        input.style.marginBottom = "15px"
-        input.style.width = "100%"
-        playersInputs.appendChild(input)
+        for (let i = 0; i < gameState.playerCount; i++) {
+            let input = document.createElement("input")
+            input.id = "p" + i
+            input.placeholder = "اسم اللاعب " + (i + 1)
+            input.style.marginBottom = "15px"
+            input.style.width = "100%"
+            playersInputs.appendChild(input)
+        }
     }
 }
 
@@ -660,7 +844,6 @@ function assignRoles() {
         gameState.players.push(name)
     }
 
-    // اختيار اللاعبين اللي برا السالفة
     let shuffled = [...gameState.players]
     for (let i = shuffled.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1))
@@ -722,9 +905,8 @@ function startQuestions() {
     document.getElementById("questionsScreen").classList.remove("hidden")
 
     document.getElementById("categoryName").innerText = gameState.category
-
-    // تحديث عداد الجولات
-    document.getElementById("roundCounter").innerText = `الجولة 1 من ${gameState.maxQuestions}`
+    
+    document.getElementById("roundCounter").innerText = `الجولة 1 / ${gameState.maxQuestions}`
 
     gameState.currentQuestion = 0
     gameState.lastAsker = -1
@@ -733,33 +915,87 @@ function startQuestions() {
 }
 
 function showQuestion() {
-    // توليد سؤال عشوائي مع ضمان عدم تكرار السائل
     let a, b
-
-    // نختار سائل ما يسأل مرتين ورا بعض
+    let isOpenQuestion = gameState.currentQuestion >= gameState.openQuestionStart
+    
+    if (isOpenQuestion) {
+        document.getElementById("questionTypeBadge").classList.remove("hidden")
+        document.getElementById("questionTypeSymbol").innerText = "🎯 يسأل الكل ❓"
+    } else {
+        document.getElementById("questionTypeBadge").classList.add("hidden")
+        document.getElementById("questionTypeSymbol").innerText = "❓ يسأل ❓"
+    }
+    
     do {
         a = Math.floor(Math.random() * gameState.players.length)
     } while (a === gameState.lastAsker)
-
-    // نختار مستقبل مختلف عن السائل وما يكون آخر مستقبل (إذا في تاريخ)
-    if (gameState.askedHistory.length > 0) {
-        let lastReceiver = gameState.askedHistory[gameState.askedHistory.length - 1]?.receiver
-        do {
-            b = Math.floor(Math.random() * gameState.players.length)
-        } while (b === a || b === lastReceiver)
+    
+    gameState.currentRoundAsker = a
+    
+    if (isOpenQuestion) {
+        document.getElementById("receiver").innerHTML = "🎯 الكل"
+        document.getElementById("openQuestionList").style.display = "block"
+        
+        let excludedIndices = []
+        if (gameState.askedHistory.length > 0) {
+            let lastRound = gameState.askedHistory[gameState.askedHistory.length - 1]
+            if (lastRound) {
+                if (lastRound.receiver !== undefined && lastRound.receiver !== -1) {
+                    excludedIndices.push(lastRound.receiver)
+                }
+            }
+        }
+        
+        excludedIndices.push(a)
+        
+        let excludedNames = excludedIndices.map(idx => gameState.players[idx]).join('، ')
+        document.getElementById("excludedPlayers").innerText = excludedNames || 'لا أحد'
+        
+        gameState.questions[gameState.currentQuestion] = {
+            ask: a, 
+            rec: -1,
+            isOpen: true,
+            excluded: excludedIndices
+        }
     } else {
-        do {
-            b = Math.floor(Math.random() * gameState.players.length)
-        } while (b === a)
+        document.getElementById("openQuestionList").style.display = "none"
+        
+        let availableReceivers = []
+        
+        for (let i = 0; i < gameState.players.length; i++) {
+            if (i !== a) {
+                availableReceivers.push(i)
+            }
+        }
+        
+        b = availableReceivers[Math.floor(Math.random() * availableReceivers.length)]
+        
+        document.getElementById("receiver").innerHTML = gameState.players[b]
+        
+        gameState.questions[gameState.currentQuestion] = {ask: a, rec: b, isOpen: false}
     }
 
-    gameState.questions[gameState.currentQuestion] = {ask: a, rec: b}
     gameState.lastAsker = a
-    gameState.askedHistory.push({asker: a, receiver: b, round: gameState.currentQuestion + 1})
+    gameState.askedHistory.push({
+        asker: a, 
+        receiver: isOpenQuestion ? -1 : b, 
+        round: gameState.currentQuestion,
+        isOpen: isOpenQuestion,
+        excluded: isOpenQuestion ? excludedIndices : []
+    })
 
-    document.getElementById("roundCounter").innerText = `الجولة ${gameState.currentQuestion + 1} من ${gameState.maxQuestions}`
+    let currentRoundDisplay = gameState.currentQuestion + 1
+    let totalRoundsDisplay = gameState.maxQuestions
+    let remainingRounds = totalRoundsDisplay - currentRoundDisplay
+    
+    let roundText = `الجولة ${currentRoundDisplay} / ${totalRoundsDisplay}`
+    if (remainingRounds > 0) {
+        roundText += `<br><small style="font-size:0.6em; color:#e67e22">⏳ متبقي ${remainingRounds} جولات</small>`
+    }
+    
+    document.getElementById("roundCounter").innerHTML = roundText
+    
     document.getElementById("asker").innerText = gameState.players[a]
-    document.getElementById("receiver").innerText = gameState.players[b]
 }
 
 function nextQuestion() {
@@ -767,17 +1003,41 @@ function nextQuestion() {
         gameState.currentQuestion++
         showQuestion()
     } else {
-        // في الجولة النهائية (آخر جولة)
-        if (confirm("🗳️ هذه آخر جولة!\n\nتبغى تسأل سؤال زيادة ولا نبدأ التصويت؟\n\n• OK = سؤال زيادة\n• إلغاء = التصويت")) {
-            // اختار سؤال زيادة
-            gameState.maxQuestions++ // نزيد عدد الجولات
-            gameState.currentQuestion++
-            showQuestion()
-            document.getElementById("roundCounter").innerText = `الجولة ${gameState.currentQuestion + 1} من ${gameState.maxQuestions}`
-        } else {
-            // يروح للتصويت
-            startVoting()
-        }
+        showFinalRoundChoice()
+    }
+}
+
+function showFinalRoundChoice() {
+    document.getElementById("questionsScreen").classList.add("hidden")
+    
+    const choiceScreen = document.createElement('div');
+    choiceScreen.className = 'choice-screen';
+    choiceScreen.id = 'tempChoiceScreen';
+    choiceScreen.innerHTML = `
+        <h2>🎯 الجولة النهائية!</h2>
+        <p>خلصت الجولات الأساسية (${gameState.maxQuestions})</p>
+        <div class="choice-buttons">
+            <button class="choice-btn continue" onclick="handleChoice(true)">➕ سؤال زيادة</button>
+            <button class="choice-btn vote" onclick="handleChoice(false)">🗳️ التصويت النهائي</button>
+        </div>
+    `;
+    
+    document.querySelector('.container').appendChild(choiceScreen);
+}
+
+function handleChoice(continueGame) {
+    document.getElementById('tempChoiceScreen')?.remove();
+    
+    if (continueGame) {
+        gameState.maxQuestions++
+        gameState.currentQuestion++
+        
+        document.getElementById("questionsScreen").classList.remove("hidden")
+        showQuestion()
+        
+        showNotification('➕ سؤال زيادة!', `الآن ${gameState.maxQuestions} جولة`, 2000)
+    } else {
+        startVoting()
     }
 }
 
@@ -796,7 +1056,6 @@ function showVotingForCurrentPlayer() {
 
     let currentVoterName = gameState.players[gameState.currentVoter]
 
-    // رسالة فوق أزرار التصويت
     let headerMsg = document.createElement("div")
     headerMsg.style.textAlign = "center"
     headerMsg.style.marginBottom = "20px"
@@ -812,11 +1071,17 @@ function showVotingForCurrentPlayer() {
         let btn = document.createElement("button")
         btn.className = "vote-btn"
         btn.innerText = player
-        btn.onclick = function() {
-            selectVote(index)
+        
+        if (index === gameState.currentVoter) {
+            btn.disabled = true
+            btn.style.opacity = "0.5"
+            btn.title = "ما تقدر تصوت على نفسك"
+        } else {
+            btn.onclick = function() {
+                selectVote(index)
+            }
         }
 
-        // إذا كان اللاعب قد اختاره من قبل
         if (gameState.votes[gameState.currentVoter].includes(index)) {
             btn.classList.add('selected')
         }
@@ -834,10 +1099,8 @@ function selectVote(playerIndex) {
     let currentVotes = [...gameState.votes[gameState.currentVoter]]
 
     if (currentVotes.includes(playerIndex)) {
-        // إلغاء التحديد
         currentVotes = currentVotes.filter(v => v !== playerIndex)
     } else {
-        // إضافة التحديد (إذا لم يصل للحد الأقصى)
         if (currentVotes.length < gameState.outsideCount) {
             currentVotes.push(playerIndex)
         }
@@ -845,11 +1108,10 @@ function selectVote(playerIndex) {
 
     gameState.votes[gameState.currentVoter] = currentVotes
 
-    // تحديث شكل الأزرار
     document.querySelectorAll('.vote-btn').forEach((btn, idx) => {
-        if (gameState.votes[gameState.currentVoter].includes(idx)) {
+        if (!btn.disabled && gameState.votes[gameState.currentVoter].includes(idx)) {
             btn.classList.add('selected')
-        } else {
+        } else if (!btn.disabled) {
             btn.classList.remove('selected')
         }
     })
@@ -870,22 +1132,20 @@ function submitVote() {
         gameState.currentVoter++
         showVotingForCurrentPlayer()
     } else {
-        // التصويت خلص، ننتقل لشاشة التخمين بعد الكشف
         document.getElementById("votingScreen").classList.add("hidden")
 
-        // نعرض النتيجة الأولية (مين اللي برا السالفة) قبل التخمين
         let outsideNames = gameState.outsidePlayers.join("، ")
-        alert(`🔍 اللي برا السالفة هم: ${outsideNames}\nالآن دورهم يخمنوا الكلمة`)
+        showNotification('🔍 الكشف!', `اللي برا السالفة هم: ${outsideNames}`, 4000)
 
-        // نبدأ تخمين برا السالفة
-        startGuessing()
+        setTimeout(() => {
+            startGuessing()
+        }, 1500)
     }
 }
 
 function startGuessing() {
     document.getElementById("guessScreen").classList.remove("hidden")
 
-    // نجيب أول واحد برا السالفة
     gameState.currentSpyIndex = 0
     showGuessForCurrentSpy()
 }
@@ -894,24 +1154,20 @@ function showGuessForCurrentSpy() {
     let currentSpy = gameState.outsidePlayers[gameState.currentSpyIndex]
     document.getElementById("spyName").innerHTML = currentSpy + " 🤔"
 
-    // تجهيز 8 خيارات
     let options = [gameState.selectedWord]
     let otherWords = gameState.words.filter(w => w !== gameState.selectedWord)
 
-    // خلط الكلمات
     for (let i = otherWords.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1))
         ;[otherWords[i], otherWords[j]] = [otherWords[j], otherWords[i]]
     }
 
-    // أخذ أول 7 كلمات مختلفة
     for (let i = 0; i < 7; i++) {
         if (otherWords[i]) {
             options.push(otherWords[i])
         }
     }
 
-    // خلط الخيارات
     for (let i = options.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1))
         ;[options[i], options[j]] = [options[j], options[i]]
@@ -930,7 +1186,6 @@ function showGuessForCurrentSpy() {
         guessDiv.appendChild(btn)
     })
 
-    // نخزن خيارات كل جاسوس
     if (!gameState.spyGuesses) {
         gameState.spyGuesses = []
     }
@@ -958,7 +1213,6 @@ function showFinalResult() {
         return
     }
 
-    // نخمن التخمين للجاسوس الحالي
     gameState.spyGuesses[gameState.currentSpyIndex] = {
         player: gameState.outsidePlayers[gameState.currentSpyIndex],
         guess: gameState.spyGuess,
@@ -966,20 +1220,14 @@ function showFinalResult() {
     }
 
     if (gameState.currentSpyIndex < gameState.outsidePlayers.length - 1) {
-        // في جاسوس ثاني
         gameState.currentSpyIndex++
         showGuessForCurrentSpy()
     } else {
-        // خلصنا التخمين، نعرض النتيجة النهائية
         document.getElementById("guessScreen").classList.add("hidden")
         document.getElementById("finalResultScreen").classList.remove("hidden")
 
         let resultHTML = ""
 
-        // نحسب الأصوات (نعرض مين صوّت على مين)
-        resultHTML += "<h3 style='color:#fff'>📊 نتائج التصويت:</h3>"
-
-        // نجمع الأصوات لكل لاعب
         let voteCounts = new Array(gameState.players.length).fill(0)
         gameState.votes.forEach(voteArray => {
             voteArray.forEach(votedIndex => {
@@ -987,14 +1235,13 @@ function showFinalResult() {
             })
         })
 
-        // نعرض النتائج
+        resultHTML += "<h3 style='color:#fff'>📊 نتائج التصويت:</h3>"
         resultHTML += "<div style='text-align:right; margin:15px 0'>"
         gameState.players.forEach((player, index) => {
             resultHTML += `• ${player}: ${voteCounts[index]} صوت<br>`
         })
         resultHTML += "</div>"
 
-        // اللي انكشفوا
         resultHTML += "<br><h3 style='color:#fff'>🕵️ اللي برا السالفة:</h3>"
         resultHTML += "• " + gameState.outsidePlayers.join("<br>• ")
 
@@ -1008,14 +1255,37 @@ function showFinalResult() {
 
         resultHTML += "<br><div style='background:rgba(255,255,255,0.2); padding:15px; border-radius:15px; margin-top:15px'>"
 
-        // تحديد الفائز
+        let totalVotesOnSpies = 0
+        gameState.outsidePlayers.forEach(spy => {
+            let spyIndex = gameState.players.indexOf(spy)
+            totalVotesOnSpies += voteCounts[spyIndex]
+        })
+        
+        let totalVotes = gameState.playerCount * gameState.outsideCount
+        let votePercentage = (totalVotesOnSpies / totalVotes) * 100
+        let majorityThreshold = 50
+        
         let allCorrect = gameState.spyGuesses.every(spy => spy.correct)
-        if (allCorrect && gameState.outsidePlayers.length > 0) {
-            resultHTML += "🏆 برا السالفة الستوتين فازو! عرفو الكلمة صح"
-        } else if (gameState.outsidePlayers.length > 0) {
-            resultHTML += "🎉 الباقي الستوتين فازو! برا السالفة ما عرفوش الكلمة"
+
+        resultHTML += `<p style='font-size:1.1em'>📊 نسبة الأصوات على الجواسيس: ${votePercentage.toFixed(1)}%</p>`
+
+        if (votePercentage >= majorityThreshold) {
+            resultHTML += "<p style='color:#ff7675; font-weight:bold; font-size:1.3em; margin-top:10px'>❌ برا السالفة خسروا!</p>"
+            resultHTML += "<p>لأن أغلبية الأصوات كانت عليهم (تم اكتشافهم)</p>"
+            if (allCorrect) {
+                resultHTML += "<p>😢 حتى لو عرفوا الكلمة صح، الناس عرفتهم</p>"
+            }
+            showNotification('❌ خسارة!', 'برا السالفة خسروا', 3000)
         } else {
-            resultHTML += "😎 ما في برا السالفة"
+            if (allCorrect) {
+                resultHTML += "<p style='color:#00b894; font-weight:bold; font-size:1.3em; margin-top:10px'>🏆 برا السالفة فازوا!</p>"
+                resultHTML += "<p>عرفوا الكلمة وما انكشفوا</p>"
+                showNotification('🏆 فوز!', 'برا السالفة فازوا', 3000)
+            } else {
+                resultHTML += "<p style='color:#ff7675; font-weight:bold; font-size:1.3em; margin-top:10px'>❌ برا السالفة خسروا!</p>"
+                resultHTML += "<p>ما عرفوا الكلمة</p>"
+                showNotification('❌ خسارة!', 'برا السالفة خسروا', 3000)
+            }
         }
 
         resultHTML += "</div>"
@@ -1029,7 +1299,6 @@ function playAgain() {
 
     gameState.selectedWord = gameState.words[Math.floor(Math.random() * gameState.words.length)]
 
-    // إعادة اختيار اللي برا السالفة
     let shuffled = [...gameState.players]
     for (let i = shuffled.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1))
@@ -1043,6 +1312,7 @@ function playAgain() {
     gameState.spyGuesses = []
     gameState.currentQuestion = 0
     gameState.maxQuestions = gameState.playerCount * 2
+    gameState.openQuestionStart = Math.floor(gameState.maxQuestions * 0.7)
     gameState.lastAsker = -1
     gameState.askedHistory = []
 
@@ -1050,10 +1320,24 @@ function playAgain() {
     showRole()
 }
 
+function changeCategory() {
+    document.getElementById("finalResultScreen").classList.add("hidden")
+    
+    document.getElementById("categoryScreen").classList.remove("hidden")
+    
+    document.getElementById("playerCount").value = gameState.playerCount
+    document.getElementById("outsideCount").value = gameState.outsideCount
+    
+    window.savedPlayers = [...gameState.players]
+    
+    showNotification('📝 نفس اللاعبين', 'اختاروا موضوع جديد', 2000)
+}
+
 function goHome() {
     location.reload()
 }
 
+createParticles()
 </script>
 
 </body>
