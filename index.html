@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>برا السالفة - نسخة النخبة</title>
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Tajawal', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(255,255,255,0.1) inset;
+    max-width: 650px;
+    width: 100%;
+    padding: 40px;
+    animation: slideIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 3em;
+    font-weight: 800;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+    letter-spacing: 2px;
+}
+
+h1::after {
+    content: "🎭";
+    display: block;
+    font-size: 0.5em;
+    margin-top: 5px;
+}
+
+h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: 700;
+    position: relative;
+    padding-right: 15px;
+}
+
+h3::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background: linear-gradient(135deg, #0f2027, #2c5364);
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+button {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 15px;
+    width: 100%;
+    font-size: 1.1em;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 8px 20px rgba(15, 32, 39, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+button::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+button:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(15, 32, 39, 0.5);
+}
+
+button:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.category-btn {
+    background: linear-gradient(135deg, #e0e0e0, #d0d0d0);
+    color: #2c3e50;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 1em;
+    padding: 12px;
+}
+
+.category-btn.selected {
+    background: linear-gradient(135deg, #0f2027, #2c5364);
+    color: white;
+    transform: scale(1.08) rotate(1deg);
+    border-color: #fff;
+    box-shadow: 0 10px 25px rgba(15, 32, 39, 0.4);
+}
+
+select, input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 15px;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+select:focus, input:focus {
+    outline: none;
+    border-color: #2c5364;
+    box-shadow: 0 0 0 4px rgba(44, 83, 100, 0.2);
+    transform: scale(1.02);
+}
+
+.word-display {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+    padding: 35px;
+    border-radius: 25px;
+    text-align: center;
+    margin: 25px 0;
+    box-shadow: 0 20px 40px rgba(15, 32, 39, 0.4), 0 0 0 2px rgba(255,255,255,0.2) inset;
+    position: relative;
+    overflow: hidden;
+}
+
+.word-display::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.word-display h2 {
+    font-size: 2.2em;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
+.hand-phone {
+    background: linear-gradient(135deg, #f6d365, #fda085);
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: 700;
+    border-right: 8px solid #f88;
+    animation: pulse 2s infinite, glow 2s infinite;
+    color: #2c3e50;
+    box-shadow: 0 10px 25px rgba(253, 160, 133, 0.4);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 5px #fda085; }
+    50% { box-shadow: 0 0 30px #f6d365; }
+    100% { box-shadow: 0 0 5px #fda085; }
+}
+
+.homeBtn {
+    position: fixed;
+    left: 25px;
+    top: 25px;
+    background: linear-gradient(135deg, #ff6b6b, #ee5253);
+    width: auto;
+    padding: 12px 25px;
+    border-radius: 50px;
+    box-shadow: 0 8px 20px rgba(238, 82, 83, 0.4);
+    z-index: 1000;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+.homeBtn:hover {
+    background: linear-gradient(135deg, #ee5253, #ff6b6b);
+}
+
+.voting-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 15px;
+    margin: 25px 0;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.vote-btn {
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    margin: 0;
+    padding: 18px 12px;
+    font-size: 1.2em;
+    font-weight: 700;
+    border-radius: 15px;
+    position: relative;
+}
+
+.vote-btn.selected {
+    background: linear-gradient(135deg, #00b894, #00cec9);
+    transform: scale(1.05);
+    box-shadow: 0 0 0 3px #fff, 0 15px 30px rgba(0, 184, 148, 0.4);
+}
+
+.vote-btn.selected::after {
+    content: "✓✓";
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #00b894;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    border: 2px solid white;
+}
+
+.guess-option {
+    background: linear-gradient(135deg, #fdcb6e, #e17055);
+    margin: 10px 0;
+    padding: 18px;
+    font-size: 1.3em;
+    font-weight: 700;
+    border-radius: 15px;
+}
+
+.guess-option:hover {
+    background: linear-gradient(135deg, #e17055, #fdcb6e);
+}
+
+.guess-option.selected {
+    background: linear-gradient(135deg, #00b894, #00cec9);
+    transform: scale(1.02);
+    box-shadow: 0 0 0 3px #fff;
+}
+
+#roundCounter {
+    text-align: center;
+    font-size: 1.6em;
+    margin: 20px 0;
+    color: #2c5364;
+    font-weight: 800;
+    background: #f1f2f6;
+    padding: 15px;
+    border-radius: 50px;
+    border: 3px solid #2c5364;
+}
+
+#asker, #receiver {
+    font-weight: 800;
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-size: 1.3em;
+    display: inline-block;
+    margin: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+#asker {
+    color: #fff;
+    background: linear-gradient(135deg, #00b894, #00cec9);
+}
+
+#receiver {
+    color: #fff;
+    background: linear-gradient(135deg, #ff7675, #d63031);
+}
+
+.spy-name {
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+    margin: 25px 0;
+    font-weight: 900;
+    animation: glowText 1.5s infinite;
+    background: linear-gradient(135deg, #ff6b6b, #ee5253);
+    padding: 20px;
+    border-radius: 50px;
+    border: 4px solid #fff;
+}
+
+@keyframes glowText {
+    0% { box-shadow: 0 0 10px #ff6b6b; }
+    50% { box-shadow: 0 0 40px #ff6b6b; }
+    100% { box-shadow: 0 0 10px #ff6b6b; }
+}
+
+.selected-count {
+    background: #f1f2f6;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #2c5364;
+    margin: 15px 0;
+    border: 2px dashed #2c5364;
+}
+
+/* تخصيص شريط التمرير */
+.voting-grid::-webkit-scrollbar {
+    width: 10px;
+}
+
+.voting-grid::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.voting-grid::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #0f2027, #2c5364);
+    border-radius: 10px;
+}
+
+/* شاشة اختيار الاستمرار */
+.choice-screen {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 20px;
+    margin: 20px 0;
+    animation: bounceIn 0.5s ease;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.9); opacity: 0; }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.choice-screen h2 {
+    color: white;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.choice-screen p {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.3em;
+    margin-bottom: 30px;
+}
+
+.choice-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.choice-btn {
+    flex: 1;
+    padding: 20px;
+    font-size: 1.3em;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.choice-btn.continue {
+    background: linear-gradient(135deg, #00b09b, #96c93d);
+    color: white;
+}
+
+.choice-btn.continue:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0,176,155,0.4);
+}
+
+.choice-btn.vote {
+    background: linear-gradient(135deg, #ff6b6b, #ee5253);
+    color: white;
+}
+
+.choice-btn.vote:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+}
+
+</style>
+</head>
+<body>
+
+<button class="homeBtn" onclick="goHome()">🏠 الصفحة الرئيسية</button>
+
+<div class="container">
+
+<h1>برا السالفة</h1>
+
+<!-- شاشة اختيار الفئة -->
+<div id="categoryScreen">
+    <h3>📌 اختر فئة الكلمة</h3>
+    <div class="categories-grid">
+        <button class="category-btn" onclick="selectCategory('فواكه',['🍎 تفاحة','🍌 موز','🍊 برتقال','🍇 عنب','🍓 فراولة','🥭 مانجو','🍉 بطيخ','🍍 أناناس','🥝 كيوي','石榴 رمان','🍋 ليمون','🌰 تين'])">🍎 فواكه</button>
+        <button class="category-btn" onclick="selectCategory('مشاهير',['⚽ محمد صلاح','⚽ رونالدو','⚽ ميسي','🎤 عمرو دياب','🎭 عادل إمام','🎬 أحمد حلمي','🎤 تامر حسني','🎤 نانسي عجرم','🎤 فيروز','🎬 محمد هنيدي','🎬 ياسمين عبدالعزيز','🎤 شيرين'])">🌟 مشاهير</button>
+        <button class="category-btn" onclick="selectCategory('دول',['🇩🇿 الجزائر','🇪🇬 مصر','🇲🇦 المغرب','🇸🇦 السعودية','🇦🇪 الإمارات','🇫🇷 فرنسا','🇮🇹 إيطاليا','🇯🇵 اليابان','🇹🇷 تركيا','🇺🇸 أمريكا','🇬🇧 بريطانيا','🇩🇪 ألمانيا'])">🌍 دول</button>
+        <button class="category-btn" onclick="selectCategory('أجهزة',['📱 آيفون','💻 لابتوب','📺 تلفزيون','📱 آيباد','📸 كاميرا','🎧 سماعات','⌚ ساعة ذكية','🎮 بلايستيشن','📱 سامسونج','💻 ماك بوك','🎧 ايربودز','📱 آيبود'])">📱 أجهزة</button>
+        <button class="category-btn" onclick="selectCategory('حيوانات',['🦁 أسد','🐘 فيل','🦒 زرافة','🐶 كلب','🐱 قطة','🦉 بومة','🐬 دولفين','🦅 نسر','🐅 نمر','🐺 ذئب','🦊 ثعلب','🐻 دب','🦌 غزال','🐎 حصان','🐑 خروف','🐐 ماعز','🐫 جمل','🐧 بطريق','🦆 بطة','🐓 ديك','🐔 دجاجة','🕊️ حمامة','🦅 صقر','🦜 ببغاء','🐝 نحلة','🦋 فراشة','🕷️ عنكبوت','🐢 سلحفاة','🐊 تمساح','🐒 قرد','🦧 شمبانزي','🐼 باندا','🐆 فهد','🦘 كنغر','🐨 كوالا','🐠 فرس البحر','🐋 حوت','🦈 قرش','🐟 سمكة','🐴 حمار','🐂 ثور','🐄 بقرة','🦓 حمار وحشي','🦌 ظبي','🦚 طاووس','🦩 نحام','🐦 غراب','🦅 صقر'])">🦁 حيوانات</button>
+        <button class="category-btn" onclick="selectCategory('رياضات',['⚽ كرة قدم','🏀 كرة سلة','🏊 سباحة','🎾 تنس','🥋 جودو','🥊 ملاكمة','🤸 جمباز','🏎️ فورمولا','🏐 كرة طائرة','🏓 تنس طاولة','🏹 رماية','🚴 سباق دراجات'])">⚽ رياضات</button>
+    </div>
+
+    <h3>👥 عدد اللاعبين</h3>
+    <select id="playerCount">
+        <option value="3">3 لاعبين</option>
+        <option value="4">4 لاعبين</option>
+        <option value="5" selected>5 لاعبين</option>
+        <option value="6">6 لاعبين</option>
+        <option value="7">7 لاعبين</option>
+        <option value="8">8 لاعبين</option>
+        <option value="9">9 لاعبين</option>
+        <option value="10">10 لاعبين</option>
+        <option value="11">11 لاعبين</option>
+
+    </select>
+
+    <h3>🕵️ عدد اللي برا السالفة</h3>
+    <select id="outsideCount">
+        <option value="1">1 لاعب</option>
+        <option value="2">2 لاعبين</option>
+        <option value="3">3 لاعبين</option>
+        <option value="4">4 لاعبين</option>
+    </select>
+
+    <button onclick="startGame()" id="startBtn" disabled>▶ ابدأ اللعبة</button>
+</div>
+
+<!-- شاشة إدخال الأسماء -->
+<div id="playersScreen" class="hidden">
+    <h3>✍️ أدخل أسماء اللاعبين</h3>
+    <div id="playersInputs"></div>
+    <button onclick="assignRoles()">✅ التالي</button>
+</div>
+
+<!-- شاشة توزيع الأدوار -->
+<div id="roleScreen" class="hidden">
+    <div class="hand-phone" id="handPhoneMessage">
+        📱 أعط الهاتف لـ: <span id="currentPlayerHand"></span>
+    </div>
+    <div class="word-display">
+        <h2 id="playerNameDisplay"></h2>
+        <p id="playerRole"></p>
+        <div id="wordDisplay" style="font-size:50px; margin:20px 0"></div>
+    </div>
+    <button onclick="nextPlayer()" id="nextRoleBtn">⏭ التالي</button>
+</div>
+
+<!-- شاشة جولات الأسئلة -->
+<div id="questionsScreen" class="hidden">
+    <div class="word-display">
+        <h2>❓ جولات الأسئلة ❓</h2>
+        <p>الفئة: <span id="categoryName"></span></p>
+    </div>
+
+    <div id="roundCounter">الجولة 1 من 11</div>
+
+    <div style="text-align:center; margin:30px 0;">
+        <span id="asker" style="font-size:1.5em"></span>
+        <span style="color:#666; font-size:1.3em">❓ يسأل ❓</span>
+        <span id="receiver" style="font-size:1.5em"></span>
+    </div>
+
+    <div style="background:#f8f9fa; padding:20px; border-radius:20px; margin:25px 0; border:3px dashed #2c5364">
+        <p style="color:#2c5364; text-align:center; font-size:1.2em">اطرح سؤالك الذكي الآن...</p>
+    </div>
+
+    <button onclick="nextQuestion()" id="nextQuestionBtn">⏭ بعد السؤال</button>
+</div>
+
+<!-- شاشة التصويت على برا السالفة (كل لاعب يصوت) -->
+<div id="votingScreen" class="hidden">
+    <div class="word-display">
+        <h2>🗳️ التصويت السري</h2>
+        <p>كل لاعب يختار الستوت اللي يتوقعهم برا السالفة</p>
+    </div>
+
+    <div id="votingButtons" class="voting-grid"></div>
+
+    <div id="selectedCountDisplay" class="selected-count">تم اختيار 0 من 1</div>
+
+    <button onclick="submitVote()" id="voteBtn" disabled>✅ تأكيد التصويت</button>
+</div>
+
+<!-- شاشة تخمين برا السالفة للكلمة (بعد الكشف) -->
+<div id="guessScreen" class="hidden">
+    <div class="word-display">
+        <h2>🔍 تخمين الكلمة</h2>
+        <div class="spy-name" id="spyName"></div>
+        <p>حاول تخمن وش كانت السالفة ياستوت؟ (اختر 1 من 8)</p>
+    </div>
+
+    <div id="guessOptions" class="voting-grid" style="grid-template-columns:repeat(2, 1fr)"></div>
+
+    <button onclick="showFinalResult()" id="guessBtn" disabled>🔮 شوف النتيجة ياستوت</button>
+</div>
+
+<!-- شاشة النتيجة النهائية -->
+<div id="finalResultScreen" class="hidden">
+    <div class="word-display">
+        <h2>🏆 النتيجة النهائية 🏆</h2>
+        <div id="finalResult" style="font-size:1.3em; line-height:2.2"></div>
+    </div>
+
+    <button onclick="playAgain()" style="background:linear-gradient(135deg,#00b894,#00cec9)">🔄 نلعب بنفس الأسماء</button>
+    <button onclick="goHome()" style="background:linear-gradient(135deg,#ff7675,#d63031)">🏠 تغيير اللاعبين</button>
+</div>
+
+</div>
+
+<script>
+let gameState = {
+    category: '',
+    words: [],
+    selectedWord: '',
+    players: [],
+    outsidePlayers: [],
+    playerCount: 5,
+    outsideCount: 1,
+    currentPlayerIndex: 0,
+    questions: [],
+    currentQuestion: 0,
+    maxQuestions: 0,
+    handPhase: true,
+    currentVoter: 0,
+    votes: [],
+    spyGuess: null,
+    votingComplete: false,
+    lastAsker: -1, // آخر واحد سأل
+    askedHistory: [] // تاريخ الأسئلة
+}
+
+function selectCategory(c, w) {
+    gameState.category = c
+    gameState.words = w
+    document.getElementById("startBtn").disabled = false
+
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.remove('selected')
+    })
+    event.target.classList.add('selected')
+}
+
+function startGame() {
+    gameState.playerCount = parseInt(document.getElementById("playerCount").value)
+    gameState.outsideCount = parseInt(document.getElementById("outsideCount").value)
+
+    // عدد الجولات = عدد اللاعبين × 2 (عشان الكل يشارك)
+    gameState.maxQuestions = gameState.playerCount * 2
+
+    gameState.selectedWord = gameState.words[Math.floor(Math.random() * gameState.words.length)]
+
+    document.getElementById("categoryScreen").classList.add("hidden")
+    document.getElementById("playersScreen").classList.remove("hidden")
+
+    let playersInputs = document.getElementById("playersInputs")
+    playersInputs.innerHTML = ""
+
+    for (let i = 0; i < gameState.playerCount; i++) {
+        let input = document.createElement("input")
+        input.id = "p" + i
+        input.placeholder = "اسم اللاعب " + (i + 1)
+        input.style.marginBottom = "15px"
+        input.style.width = "100%"
+        playersInputs.appendChild(input)
+    }
+}
+
+function assignRoles() {
+    gameState.players = []
+
+    for (let i = 0; i < gameState.playerCount; i++) {
+        let name = document.getElementById("p" + i).value
+        if (name === "") {
+            alert("اكتب كل الأسماء يا معلم")
+            return
+        }
+        gameState.players.push(name)
+    }
+
+    // اختيار اللاعبين اللي برا السالفة
+    let shuffled = [...gameState.players]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1))
+        ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
+    gameState.outsidePlayers = shuffled.slice(0, gameState.outsideCount)
+
+    document.getElementById("playersScreen").classList.add("hidden")
+    document.getElementById("roleScreen").classList.remove("hidden")
+
+    gameState.currentPlayerIndex = 0
+    gameState.handPhase = true
+
+    showRole()
+}
+
+function showRole() {
+    let player = gameState.players[gameState.currentPlayerIndex]
+
+    document.getElementById("currentPlayerHand").innerText = player
+
+    if (gameState.handPhase) {
+        document.getElementById("playerNameDisplay").innerText = "👋 مرحباً"
+        document.getElementById("playerRole").innerText = "مرر الهاتف للاعب التالي"
+        document.getElementById("wordDisplay").innerHTML = "📱"
+        document.getElementById("nextRoleBtn").innerText = "عرض الدور"
+    } else {
+        document.getElementById("playerNameDisplay").innerText = player
+
+        if (gameState.outsidePlayers.includes(player)) {
+            document.getElementById("playerRole").innerHTML = "🕵️ أنت <strong style='color:#ff7675'>برا السالفة</strong>"
+            document.getElementById("wordDisplay").innerHTML = "❓❓❓"
+        } else {
+            document.getElementById("playerRole").innerHTML = "✅ أنت <strong style='color:#00b894'>داخل السالفة</strong>"
+            document.getElementById("wordDisplay").innerHTML = "🔤 " + gameState.selectedWord
+        }
+        document.getElementById("nextRoleBtn").innerText = "التالي"
+    }
+}
+
+function nextPlayer() {
+    if (gameState.handPhase) {
+        gameState.handPhase = false
+        showRole()
+        return
+    }
+
+    if (gameState.currentPlayerIndex < gameState.players.length - 1) {
+        gameState.currentPlayerIndex++
+        gameState.handPhase = true
+        showRole()
+    } else {
+        startQuestions()
+    }
+}
+
+function startQuestions() {
+    document.getElementById("roleScreen").classList.add("hidden")
+    document.getElementById("questionsScreen").classList.remove("hidden")
+
+    document.getElementById("categoryName").innerText = gameState.category
+
+    // تحديث عداد الجولات
+    document.getElementById("roundCounter").innerText = `الجولة 1 من ${gameState.maxQuestions}`
+
+    gameState.currentQuestion = 0
+    gameState.lastAsker = -1
+    gameState.askedHistory = []
+    showQuestion()
+}
+
+function showQuestion() {
+    // توليد سؤال عشوائي مع ضمان عدم تكرار السائل
+    let a, b
+
+    // نختار سائل ما يسأل مرتين ورا بعض
+    do {
+        a = Math.floor(Math.random() * gameState.players.length)
+    } while (a === gameState.lastAsker)
+
+    // نختار مستقبل مختلف عن السائل وما يكون آخر مستقبل (إذا في تاريخ)
+    if (gameState.askedHistory.length > 0) {
+        let lastReceiver = gameState.askedHistory[gameState.askedHistory.length - 1]?.receiver
+        do {
+            b = Math.floor(Math.random() * gameState.players.length)
+        } while (b === a || b === lastReceiver)
+    } else {
+        do {
+            b = Math.floor(Math.random() * gameState.players.length)
+        } while (b === a)
+    }
+
+    gameState.questions[gameState.currentQuestion] = {ask: a, rec: b}
+    gameState.lastAsker = a
+    gameState.askedHistory.push({asker: a, receiver: b, round: gameState.currentQuestion + 1})
+
+    document.getElementById("roundCounter").innerText = `الجولة ${gameState.currentQuestion + 1} من ${gameState.maxQuestions}`
+    document.getElementById("asker").innerText = gameState.players[a]
+    document.getElementById("receiver").innerText = gameState.players[b]
+}
+
+function nextQuestion() {
+    if (gameState.currentQuestion < gameState.maxQuestions - 1) {
+        gameState.currentQuestion++
+        showQuestion()
+    } else {
+        // في الجولة النهائية (آخر جولة)
+        if (confirm("🗳️ هذه آخر جولة!\n\nتبغى تسأل سؤال زيادة ولا نبدأ التصويت؟\n\n• OK = سؤال زيادة\n• إلغاء = التصويت")) {
+            // اختار سؤال زيادة
+            gameState.maxQuestions++ // نزيد عدد الجولات
+            gameState.currentQuestion++
+            showQuestion()
+            document.getElementById("roundCounter").innerText = `الجولة ${gameState.currentQuestion + 1} من ${gameState.maxQuestions}`
+        } else {
+            // يروح للتصويت
+            startVoting()
+        }
+    }
+}
+
+function startVoting() {
+    document.getElementById("questionsScreen").classList.add("hidden")
+    document.getElementById("votingScreen").classList.remove("hidden")
+
+    gameState.currentVoter = 0
+    gameState.votes = new Array(gameState.playerCount).fill([])
+    showVotingForCurrentPlayer()
+}
+
+function showVotingForCurrentPlayer() {
+    let votingDiv = document.getElementById("votingButtons")
+    votingDiv.innerHTML = ""
+
+    let currentVoterName = gameState.players[gameState.currentVoter]
+
+    // رسالة فوق أزرار التصويت
+    let headerMsg = document.createElement("div")
+    headerMsg.style.textAlign = "center"
+    headerMsg.style.marginBottom = "20px"
+    headerMsg.style.fontSize = "1.3em"
+    headerMsg.style.fontWeight = "bold"
+    headerMsg.style.background = "#f1f2f6"
+    headerMsg.style.padding = "15px"
+    headerMsg.style.borderRadius = "50px"
+    headerMsg.innerHTML = `🎯 دور ${currentVoterName} في التصويت`
+    votingDiv.appendChild(headerMsg)
+
+    gameState.players.forEach((player, index) => {
+        let btn = document.createElement("button")
+        btn.className = "vote-btn"
+        btn.innerText = player
+        btn.onclick = function() {
+            selectVote(index)
+        }
+
+        // إذا كان اللاعب قد اختاره من قبل
+        if (gameState.votes[gameState.currentVoter].includes(index)) {
+            btn.classList.add('selected')
+        }
+
+        votingDiv.appendChild(btn)
+    })
+
+    document.getElementById("selectedCountDisplay").innerHTML =
+        `تم اختيار ${gameState.votes[gameState.currentVoter].length} من ${gameState.outsideCount}`
+
+    document.getElementById("voteBtn").disabled = gameState.votes[gameState.currentVoter].length !== gameState.outsideCount
+}
+
+function selectVote(playerIndex) {
+    let currentVotes = [...gameState.votes[gameState.currentVoter]]
+
+    if (currentVotes.includes(playerIndex)) {
+        // إلغاء التحديد
+        currentVotes = currentVotes.filter(v => v !== playerIndex)
+    } else {
+        // إضافة التحديد (إذا لم يصل للحد الأقصى)
+        if (currentVotes.length < gameState.outsideCount) {
+            currentVotes.push(playerIndex)
+        }
+    }
+
+    gameState.votes[gameState.currentVoter] = currentVotes
+
+    // تحديث شكل الأزرار
+    document.querySelectorAll('.vote-btn').forEach((btn, idx) => {
+        if (gameState.votes[gameState.currentVoter].includes(idx)) {
+            btn.classList.add('selected')
+        } else {
+            btn.classList.remove('selected')
+        }
+    })
+
+    document.getElementById("selectedCountDisplay").innerHTML =
+        `تم اختيار ${gameState.votes[gameState.currentVoter].length} من ${gameState.outsideCount}`
+
+    document.getElementById("voteBtn").disabled = gameState.votes[gameState.currentVoter].length !== gameState.outsideCount
+}
+
+function submitVote() {
+    if (gameState.votes[gameState.currentVoter].length !== gameState.outsideCount) {
+        alert(`اختر ${gameState.outsideCount} أسماء يا معلم`)
+        return
+    }
+
+    if (gameState.currentVoter < gameState.playerCount - 1) {
+        gameState.currentVoter++
+        showVotingForCurrentPlayer()
+    } else {
+        // التصويت خلص، ننتقل لشاشة التخمين بعد الكشف
+        document.getElementById("votingScreen").classList.add("hidden")
+
+        // نعرض النتيجة الأولية (مين اللي برا السالفة) قبل التخمين
+        let outsideNames = gameState.outsidePlayers.join("، ")
+        alert(`🔍 اللي برا السالفة هم: ${outsideNames}\nالآن دورهم يخمنوا الكلمة`)
+
+        // نبدأ تخمين برا السالفة
+        startGuessing()
+    }
+}
+
+function startGuessing() {
+    document.getElementById("guessScreen").classList.remove("hidden")
+
+    // نجيب أول واحد برا السالفة
+    gameState.currentSpyIndex = 0
+    showGuessForCurrentSpy()
+}
+
+function showGuessForCurrentSpy() {
+    let currentSpy = gameState.outsidePlayers[gameState.currentSpyIndex]
+    document.getElementById("spyName").innerHTML = currentSpy + " 🤔"
+
+    // تجهيز 8 خيارات
+    let options = [gameState.selectedWord]
+    let otherWords = gameState.words.filter(w => w !== gameState.selectedWord)
+
+    // خلط الكلمات
+    for (let i = otherWords.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1))
+        ;[otherWords[i], otherWords[j]] = [otherWords[j], otherWords[i]]
+    }
+
+    // أخذ أول 7 كلمات مختلفة
+    for (let i = 0; i < 7; i++) {
+        if (otherWords[i]) {
+            options.push(otherWords[i])
+        }
+    }
+
+    // خلط الخيارات
+    for (let i = options.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1))
+        ;[options[i], options[j]] = [options[j], options[i]]
+    }
+
+    let guessDiv = document.getElementById("guessOptions")
+    guessDiv.innerHTML = ""
+
+    options.forEach((word, index) => {
+        let btn = document.createElement("button")
+        btn.className = "guess-option"
+        btn.innerText = word
+        btn.onclick = function() {
+            selectGuess(word, index)
+        }
+        guessDiv.appendChild(btn)
+    })
+
+    // نخزن خيارات كل جاسوس
+    if (!gameState.spyGuesses) {
+        gameState.spyGuesses = []
+    }
+
+    document.getElementById("guessBtn").innerText = gameState.currentSpyIndex === gameState.outsidePlayers.length - 1 ?
+        "🔮 شوف النتيجة النهائية" : "⏭ التالي"
+
+    document.getElementById("guessBtn").disabled = true
+}
+
+function selectGuess(word, index) {
+    gameState.spyGuess = word
+
+    document.querySelectorAll('.guess-option').forEach(btn => {
+        btn.classList.remove('selected')
+    })
+    event.target.classList.add('selected')
+
+    document.getElementById("guessBtn").disabled = false
+}
+
+function showFinalResult() {
+    if (!gameState.spyGuess) {
+        alert("خمن الكلمة يالحبيب")
+        return
+    }
+
+    // نخمن التخمين للجاسوس الحالي
+    gameState.spyGuesses[gameState.currentSpyIndex] = {
+        player: gameState.outsidePlayers[gameState.currentSpyIndex],
+        guess: gameState.spyGuess,
+        correct: gameState.spyGuess === gameState.selectedWord
+    }
+
+    if (gameState.currentSpyIndex < gameState.outsidePlayers.length - 1) {
+        // في جاسوس ثاني
+        gameState.currentSpyIndex++
+        showGuessForCurrentSpy()
+    } else {
+        // خلصنا التخمين، نعرض النتيجة النهائية
+        document.getElementById("guessScreen").classList.add("hidden")
+        document.getElementById("finalResultScreen").classList.remove("hidden")
+
+        let resultHTML = ""
+
+        // نحسب الأصوات (نعرض مين صوّت على مين)
+        resultHTML += "<h3 style='color:#fff'>📊 نتائج التصويت:</h3>"
+
+        // نجمع الأصوات لكل لاعب
+        let voteCounts = new Array(gameState.players.length).fill(0)
+        gameState.votes.forEach(voteArray => {
+            voteArray.forEach(votedIndex => {
+                voteCounts[votedIndex]++
+            })
+        })
+
+        // نعرض النتائج
+        resultHTML += "<div style='text-align:right; margin:15px 0'>"
+        gameState.players.forEach((player, index) => {
+            resultHTML += `• ${player}: ${voteCounts[index]} صوت<br>`
+        })
+        resultHTML += "</div>"
+
+        // اللي انكشفوا
+        resultHTML += "<br><h3 style='color:#fff'>🕵️ اللي برا السالفة:</h3>"
+        resultHTML += "• " + gameState.outsidePlayers.join("<br>• ")
+
+        resultHTML += "<br><br><h3 style='color:#fff'>🔤 الكلمة الصحيحة:</h3>"
+        resultHTML += "<span style='font-size:1.5em; background:#fff; color:#2c5364; padding:10px 20px; border-radius:50px; display:inline-block; margin:10px 0'>" + gameState.selectedWord + "</span>"
+
+        resultHTML += "<br><br><h3 style='color:#fff'>🎯 تخمينات برا السالفة:</h3>"
+        gameState.spyGuesses.forEach(spy => {
+            resultHTML += `• ${spy.player}: ${spy.guess} ${spy.correct ? '✅ صح' : '❌ خطأ'}<br>`
+        })
+
+        resultHTML += "<br><div style='background:rgba(255,255,255,0.2); padding:15px; border-radius:15px; margin-top:15px'>"
+
+        // تحديد الفائز
+        let allCorrect = gameState.spyGuesses.every(spy => spy.correct)
+        if (allCorrect && gameState.outsidePlayers.length > 0) {
+            resultHTML += "🏆 برا السالفة الستوتين فازو! عرفو الكلمة صح"
+        } else if (gameState.outsidePlayers.length > 0) {
+            resultHTML += "🎉 الباقي الستوتين فازو! برا السالفة ما عرفوش الكلمة"
+        } else {
+            resultHTML += "😎 ما في برا السالفة"
+        }
+
+        resultHTML += "</div>"
+
+        document.getElementById("finalResult").innerHTML = resultHTML
+    }
+}
+
+function playAgain() {
+    document.getElementById("finalResultScreen").classList.add("hidden")
+
+    gameState.selectedWord = gameState.words[Math.floor(Math.random() * gameState.words.length)]
+
+    // إعادة اختيار اللي برا السالفة
+    let shuffled = [...gameState.players]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1))
+        ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
+    gameState.outsidePlayers = shuffled.slice(0, gameState.outsideCount)
+
+    gameState.currentPlayerIndex = 0
+    gameState.handPhase = true
+    gameState.votes = []
+    gameState.spyGuesses = []
+    gameState.currentQuestion = 0
+    gameState.maxQuestions = gameState.playerCount * 2
+    gameState.lastAsker = -1
+    gameState.askedHistory = []
+
+    document.getElementById("roleScreen").classList.remove("hidden")
+    showRole()
+}
+
+function goHome() {
+    location.reload()
+}
+
+</script>
+
+</body>
+</html>
